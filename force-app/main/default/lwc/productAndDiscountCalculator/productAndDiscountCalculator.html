@@ -1,0 +1,104 @@
+<!--
+* Purpose: This Html file is used to create Product Details and Discount Calculator
+* Created By: Nelson Samuel J
+* Created On: 02-06-2026
+-->
+<template>
+    <lightning-card>
+
+        <!-- Product Table  -->
+        <template lwc:if={isProductAvailable}>
+            <h1 class="slds-text-heading_large slds-text-align_center">Product Details</h1>
+            <div class="slds-grid slds-grid_align-end slds-m-right_large"><lightning-button label="Delete Selected"
+                    name="Delete Selected" variant="destructive" onclick={actionDeleteHandler}></lightning-button></div>
+            <div class="slds-scrollable slds-m-around_medium">
+                <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-max-medium-table_stacked-horizontal">
+                    <!-- Header -->
+                    <thead>
+                        <tr>
+                            <th><lightning-input type="checkbox" onchange={handleHeadCheckboxChange}></lightning-input>
+                            </th>
+                            <th>Serial No</th>
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Category</th>
+                            <th>Original Price</th>
+                            <th>Discount %</th>
+                            <th>Discounted Price</th>
+                            <th>Calculate</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={arrUIData} for:item="data" for:index="index">
+                            <tr key={data.Id}>
+                                <td><lightning-input type="checkbox" data-id={data.Id} class="rowCheckbox"
+                                        onchange={handleCheckboxChange}></lightning-input></td>
+                                <td>{index + 1}</td>
+                                <td>{data.ProductName}</td>
+                                <td>{data.ProductCode}</td>
+                                <td>{data.Category}</td>
+                                <td>{data.OriginalPrice}</td>
+                                <td> <lightning-input type="number" name="DiscountPercentage" data-id={data.Id}
+                                        onchange={handleDiscountChange} value={data.DiscountPercentage}>
+                                    </lightning-input></td>
+                                <td>{data.DiscountedPrice}</td>
+                                <td> <lightning-button label="Calculate" name="Calculate" data-id={data.Id}
+                                        variant="success" onclick={actionHandler}></lightning-button></td>
+                                <td> <lightning-button label="Delete" name="Delete" variant="destructive"
+                                        onclick={actionHandler} data-id={data.Id}></lightning-button></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <!-- Backup Table  -->
+        <template lwc:if={isBackupDataAvailable}>
+            <h1 class="slds-text-heading_large slds-text-align_center">Backup Product Details</h1>
+            <div class="slds-grid slds-grid_align-end slds-m-right_large"><lightning-button label="Restore Selected"
+                    name="Restore Selected" variant="success" onclick={bulkRestoreHandler}></lightning-button></div>
+            <div class="slds-scrollable slds-m-around_medium">
+                <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-max-medium-table_stacked-horizontal">
+
+                    <!-- Header -->
+                    <thead>
+                        <tr>
+                            <th><lightning-input type="checkbox" id="bulkRestoreCheckBox" onchange={handleRestoreHeadCheckboxChange}></lightning-input>
+                            </th>
+                            <th>Serial No</th>
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Category</th>
+                            <th>Original Price</th>
+                            <th>Discount %</th>
+                            <th>Discounted Price</th>
+                            <th>Calculate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={arrBackupData} for:item="data" for:index="index">
+                            <tr key={data.Id}>
+                                <td><lightning-input type="checkbox" data-id={data.Id} class="rowbackupCheckbox"
+                                        onchange={handleRestoreCheckboxChange}></lightning-input></td>
+                                <td>{index+1}</td>
+                                <td>{data.ProductName}</td>
+                                <td>{data.ProductCode}</td>
+                                <td>{data.Category}</td>
+                                <td>{data.OriginalPrice}</td>
+                                <td> {data.DiscountPercentage}</td>
+                                <td>{data.DiscountedPrice}</td>
+                                <td> <lightning-button label="Restore" name="Restore" data-id={data.Id}
+                                        variant="success" onclick={RestoreHandler}></lightning-button></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </lightning-card>
+
+</template>

@@ -1,0 +1,12 @@
+<!-- * Purpose: This Html file is used to create Parent Component
+     * Created By: Nelson Samuel J
+     * Created On: 30-05-20226
+-->
+<template>
+    <div class="align-Parent">
+        <h1>Parent Component</h1>
+        <label>Enter your percentage:</label>
+        <input type="number" onchange={handlePercentage}></input>
+        <c-child-component int-percentage={intParentPercentage}></c-child-component>
+    </div>
+</template>

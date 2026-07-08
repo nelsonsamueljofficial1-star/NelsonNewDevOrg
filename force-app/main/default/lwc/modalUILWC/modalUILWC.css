@@ -1,0 +1,20 @@
+.b-0 {
+    border-radius: 0;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    gap: 10px;
+}
+
+h1 {
+    text-align: center;
+    padding: 10px;
+}
+
+.save-btn {
+    --slds-c-button-radius-border: 3px;
+}

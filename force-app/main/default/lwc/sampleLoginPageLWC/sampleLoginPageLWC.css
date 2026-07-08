@@ -1,0 +1,77 @@
+.container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 5px;
+    background: linear-gradient(to right, #56ccf2, #b245f5);
+}
+
+.Inner-Container {
+    padding: 50px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 40%;
+}
+
+.Login-Header {
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 15px;
+}
+
+input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin-bottom: 12px;
+    margin-top: 2px;
+}
+
+.submit-btn {
+    border-radius: 30px;
+    height: 45px;
+    background: linear-gradient(to right, #56ccf2, #e940f4);
+    color: white;
+    cursor: pointer;
+}
+
+.External-Links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 150px;
+}
+
+.text-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+a {
+    color: black;
+}
+
+.p-signup-1 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.p-sign-21 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.p-sign-22 {
+    text-align: center;
+}

@@ -1,0 +1,188 @@
+<!--
+* Purpose: This Html file is used to show PB Banking UI Modal
+* Created By: Nelson Samuel J
+* Created On: 10-06-2026
+-->
+<template>
+    <div style="background-color: #fbfcfd;">
+
+        <!-- Spinner Show  -->
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium">
+            </lightning-spinner>
+        </template>
+
+        <!-- Login Page -->
+        <template lwc:if={bolLoginPage}>
+            <div style="padding: 2px 30px; padding-bottom: 15px;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                    <lightning-icon icon-name="action:new_custom16" size="small" variant="error"></lightning-icon>
+                    <h1 class="slds-text-heading_medium "
+                        style="margin-bottom: 10px; font-weight: bold; text-align: center; color: black; margin-top: 10px;">
+                        PB Banks</h1>
+                </div>
+                <hr style="margin-bottom: 10px;" />
+                <div style="padding-bottom: 10px;">
+                    <lightning-input type="text" style="margin-top: 2px;" placeholder="👤 Customer Id" name="CustomerId"
+                        onchange={loginChangeHandler}>
+                    </lightning-input>
+                    <lightning-input type="password" style="margin-top: 5px;" placeholder="🔒 Pin Number"
+                        name="PinNumber" onchange={loginChangeHandler}>
+                    </lightning-input>
+                    <div style="display: flex;  justify-content: center; margin-top: 20px;">
+                        <button
+                            style="background-color: #1968df; padding: 6px; width: 100%; color: white; border: 1px solid white; border-radius: 5px;"
+                            onclick={loginHandler}>Log In</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Welecome Page -->
+        <template lwc:if={bolWelcomePage}>
+            <div style="padding: 2px 30px; padding-bottom: 15px;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                    <lightning-icon icon-name="action:new_custom16" size="small" variant="error"></lightning-icon>
+                    <h1 class="slds-text-heading_medium"
+                        style="margin-bottom: 15px; font-weight: bold; text-align: center; color: black; margin-top: 10px;">
+                        PB Banks</h1>
+                </div>
+                <h2 style="font-weight: bold; margin-top: 10px; text-align: center; color: black;">Welcome!</h2>
+                <hr style="margin-bottom: 10px;" />
+                <div style="display: flex; gap: 5px;">
+
+                    <div style="width: 50%; margin-top: 10px;">
+                        <button name="Balance" onclick={handleWelcomeButtons}
+                            style="height: 100px; width: 100%; padding:15px; border: 1px solid; color: white; border-radius: 5px; background-color: #1968df">
+                            <lightning-icon icon-name="utility:open_folder" variant="inverse"></lightning-icon>
+                            <h2>Balance Inquiry</h2>
+                        </button>
+
+                        <button name="History" onclick={handleWelcomeButtons}
+                            style="margin-top: 10px; height: 100px; border: 1px solid; width: 100%; padding:15px; border: 1px solid white; color: white; border-radius: 5px; background-color: #f2941f">
+                            <lightning-icon icon-name="utility:file" variant="inverse"></lightning-icon>
+                            <h2>Transaction History</h2>
+                        </button>
+                    </div>
+                    <div style="width: 50%; margin-top: 10px;">
+                        <button name="Withrawal" onclick={handleWelcomeButtons}
+                            style="height: 100px; border: 1px solid; width: 100%; padding:15px; border: 1px solid white; color: white; border-radius: 5px; background-color: #50a84d">
+                            <lightning-icon icon-name="utility:money" variant="inverse"></lightning-icon>
+                            <h2>Withrawal</h2>
+                        </button>
+                        <button name="LogOut" onclick={handleWelcomeButtons}
+                            style="margin-top: 10px; border: 1px solid; height: 100px; width: 100%; padding:15px; border: 1px solid white; color: white; border-radius: 5px; background-color: #c5292f">
+                            <lightning-icon icon-name="utility:power" variant="inverse"></lightning-icon>
+                            <h2>Log Out</h2>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Balance Page  -->
+        <template lwc:if={bolBalancePage}>
+            <div>
+                <lightning-combobox placeholder="Select Account Type" style="margin: 10px;" label="Account Type"
+                    name="AccountType" options={lstAccTypeOptions} onchange={handleBalanceChange}> </lightning-combobox>
+                <div style="padding: 20px 100px; padding-top: 40px;">
+                    <h2 class="slds-text-heading_small" style=" font-weight: bold; text-align: center; color: black;">
+                        Available Balance:</h2>
+                    <hr style="margin-bottom: 10px; margin-top: 10px;" />
+                    <template lwc:if={hasBalanceAmount}>
+                        <h1 class="slds-text-heading_medium"
+                            style="font-weight: bold; text-align: center; color: #1968df;">
+                            Rs. {decBalanceAmount}</h1>
+                    </template>
+                    <template lwc:else>
+                        <p style=" font-weight: bold; text-align:center; color: #c5292f;">This Account type is not
+                            Created
+                            for this Customer</p>
+                    </template>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 20px; margin-top: 10px;">
+                    <button name="Previous"
+                        style="width: 48%; padding: 8px; border: 1px solid grey; background-color: white; border-radius: 5px;"
+                        onclick={handleBalanceButtons}>Previous</button>
+                    <button name="Log Out"
+                        style="width: 48%; padding: 8px; border: 1px solid white; background-color: #c5292f; color: white; border-radius: 5px;"
+                        onclick={handleBalanceButtons}>
+                        Log Out</button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Withdraw Page  -->
+        <template lwc:if={bolWithdrawPage}>
+            <div style="padding: 2px 30px; padding-bottom: 15px;">
+                <h1 class="slds-text-heading_medium "
+                    style="margin-bottom: 10px; font-weight: bold; text-align: center; color: black; margin-top: 10px;">
+                    WITHDRAWAL</h1>
+                <hr style="margin:5px 0px;" />
+                <div style="margin-top: 5px;">
+                    <lightning-combobox placeholder="👤 Select Account" label="Select Account" name="AccountType"
+                        value={strWithAccType} options={lstAccTypeOptions} onchange={handleWithdrawChange} required>
+                    </lightning-combobox>
+                    <lightning-input type="number" style="margin-top: 5px;" placeholder="₹ Enter Amount" name="Amount"
+                        value={decWithBalanceAmount} onchange={handleWithdrawChange}>
+                    </lightning-input>
+                    <hr style="margin:5px 0px;" />
+                    <div style="display: flex;  justify-content: space-evenly; margin-top: 20px;">
+                        <button name="Proceed"
+                            style="background-color: #1968df; padding: 8px; width: 45%; color: white; border: 1px solid white; border-radius: 5px;"
+                            onclick={handleWithdrawButtons}>Proceed</button>
+                        <button name="Previous"
+                            style="background-color: white; padding: 8px; width: 20%; color: black; border: 1px solid grey; border-radius: 5px;"
+                            onclick={handleWithdrawButtons}>Previous</button>
+                        <button name="Log Out"
+                            style="background-color: #c5292f; padding: 8px; width: 30%; color: white; border: 1px solid white; border-radius: 5px;"
+                            onclick={handleWithdrawButtons}>Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Transaction History -->
+        <template lwc:if={bolHistoryPage}>
+            <div style="padding: 2px 30px; padding-bottom: 15px;">
+                <h1 class="slds-text-heading_medium "
+                    style="margin-bottom: 10px; font-weight: bold; text-align: center; color: black; margin-top: 10px;">
+                    Transaction History</h1>
+                <hr style="margin:5px 0px;" />
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <lightning-input type="date" style="width: 48%;" name="StartDate" label="Start Date"
+                        placeholder="📅" onchange={handleHistoryChange} value={strDateStart}>
+                    </lightning-input>
+                    <lightning-input type="date" style="width: 48%;" label="End Date" name="EndDate" placeholder="📅"
+                        onchange={handleHistoryChange} value={strDateEnd}>
+                    </lightning-input>
+                </div>
+                <div style="margin-top: 10px;">
+                    <template lwc:if={hasTableHistory}>
+                        <lightning-datatable columns={lstHistoryColumns} data={lstHistoryData} key-field="Id"
+                            hide-checkbox-column="true">
+                        </lightning-datatable>
+                    </template>
+                    <template lwc:else>
+                        <p style=" font-weight: bold; text-align:center; color: #c5292f;"> No Records Found</p>
+                    </template>
+                </div>
+                <div style="display: flex;  justify-content: space-evenly; margin-top: 20px;">
+                    <button name="Previous"
+                        style="background-color: white; padding: 6px; width: 23%; color: black; border: 1px solid grey; border-radius: 5px;"
+                        onclick={handleHistoryButtons}>Previous</button>
+                    <button name="ShowHistory"
+                        style="background-color: #1968df; padding: 6px; width: 28%; color: white; border: 1px solid white; border-radius: 5px;"
+                        onclick={handleHistoryButtons}>Show History</button>
+                    <button name="Clear"
+                        style="background-color: white; padding: 6px; width: 18%; color: black; border: 1px solid grey; border-radius: 5px;"
+                        onclick={handleHistoryButtons}>Clear</button>
+                    <button name="Log Out"
+                        style="background-color: #c5292f; padding: 6px; width: 23%; color: white; border: 1px solid white; border-radius: 5px;"
+                        onclick={handleHistoryButtons}>Log Out</button>
+                </div>
+            </div>
+        </template>
+
+    </div>
+</template>

@@ -1,0 +1,21 @@
+<!-- * Purpose: This Html file is used to create Table and get data from Js 
+     * Created By: Nelson Samuel J
+     * Created On: 28-05-20226
+     -->
+<template>
+    <lightning-card >
+        <ul>
+            <h1>List of Movie</h1>
+            <template lwc:if={isDataAvailable}> 
+                <template for:each={arrMovieData} for:item="movie">
+
+                    <li key={movie.Id}>Name: {movie.Name} | Rating: {movie.Rating} | Status: {movie.showMsg} </li>
+                </template>
+            </template>
+            <template lwc:else>
+                <li>No Movie Available</li>
+            </template>
+
+        </ul>
+    </lightning-card>
+</template>

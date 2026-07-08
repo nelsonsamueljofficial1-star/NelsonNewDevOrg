@@ -1,0 +1,56 @@
+.blue-bg {
+    text-align: center;
+    background-color: #006dcc;
+    color: white;
+    border: 2px solid #006dcc;
+    padding: 5px;
+}
+
+.table-1-bg {
+    color: white;
+    background-color: #0098c9;
+    padding: 20px 10px;
+}
+
+.table-2-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.white-bg {
+    border: 1px solid black;
+    font-weight: 900;
+    padding: 6px;
+}
+
+.flex-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.table {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.align-vCenter {
+    display: flex;
+    justify-content: center;
+}
+
+lightning-input,
+lightning-combobox {
+    --slds-c-input-radius-border: 3px;
+    --sds-c-input-radius-border: 3px;
+}
+
+.save-btn {
+    --slds-c-button-radius-border: 3px;
+
+    /* Override the brand background colour */
+
+}

@@ -1,0 +1,75 @@
+<!-- * Purpose: This Html file is used to create Home Screen
+     * Created By: Nelson Samuel J
+     * Created On: 01-06-2026
+-->
+<template>
+    <template lwc:if={bolHomeScreen}>
+        <div
+            style="text-align: center; color: black; background-color: white; padding:12px 0px; border: 2px solid black; border-radius: 5px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWOJPCMHpCy4gBwzL2eKRyihkxRkGO5xlxxtjeNlooWhYkL2QmeRseBok&s"
+                width="60" height="60">
+            <h1 style="margin:5px 0px;">AWT Employee Portal</h1>
+            <h2>Welecome Please generate credentials </h2>
+            <h2 style="margin:2px 0px;">or login to continue.</h2>
+            <div style="display: flex; justify-content: center;  gap: 15px; margin-top: 10px;">
+                <button
+                    style="padding: 10px; background-color: white; border: 1px solid black; border-radius: 4px; color: black;"
+                    onclick={generateCredentialMethod}> 🔑 Generate Credentials</button>
+                <button
+                    style="padding: 10px 20px; background-color: white; border: 1px solid black; border-radius: 4px;"
+                    onclick={loginPageMethod}>->]
+                    Login</button>
+            </div>
+        </div>
+    </template>
+    <template lwc:elseif={bolCredentialGenerate}>
+
+        <!-- Credential Page -->
+        <div style="background-color: white; border-radius: 5px; border: 2px solid black;">
+            <h1 style="padding-left: 20px; padding-top: 17px; padding-bottom: 5px; font-weight: bold; color: black;">
+                Generate Credentials</h1>
+            <hr style=" margin-top: 6px; margin-bottom: 0px;" />
+            <div style="padding: 20px; background-color: white; padding-top: 0px; padding-bottom: 10px;">
+                <lightning-input type="text" onchange={changeHandler} style="margin-top: 2px;"
+                    placeholder="Enter username" name="UserName" label="Username" required>
+                </lightning-input>
+                <lightning-input type="password" onchange={changeHandler} style="margin-top: 10px;"
+                    placeholder="Enter password (min 8 characters)" name="Password" label="Password" required>
+                </lightning-input>
+                <lightning-input type="password" onchange={changeHandler} style="margin-top: 10px;"
+                    placeholder="Confirm password" name="ConfirmPassword" label="Confirm Password" required>
+                </lightning-input>
+                <div style="display: flex; gap: 10px; justify-content: right; margin-top: 12px;">
+                    <lightning-button label="Cancel" onclick={cancelLoginMethod}></lightning-button>
+                    <lightning-button label="Generate" onclick={generateLoginMethod}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <template lwc:elseif={bolLoginPage}>
+
+        <!-- Login Page -->
+        <div style=" background-color: white; border-radius: 5px; border: 2px solid black;">
+            <h1 style="padding-left: 20px; padding-top: 17px; padding-bottom: 5px; font-weight: bold; color: black;">
+                Login</h1>
+            <hr style="margin-top: 6px; margin-bottom: 0px;" />
+            <div style=" padding: 20px; background-color: white; padding-top: 0px; padding-bottom: 10px;">
+                <lightning-input type="text" style="margin-top: 2px;" placeholder="Enter username" name="UserName"
+                    label="Username" onchange={loginChangeHandler} required>
+                </lightning-input>
+                <lightning-input type="password" style="margin-top: 10px;" placeholder="Enter password" name="Password"
+                    label="Password" onchange={loginChangeHandler} required>
+                </lightning-input>
+                <div style="display: flex; gap: 10px; justify-content: right; margin-top: 20px;">
+                    <lightning-button label="Cancel" class="btn" onclick={cancelMethod}></lightning-button>
+                    <lightning-button label="Login" class="btn" onclick={SaveMethod}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <template lwc:elseif={bolDataEntry}>
+        <c-modal-u-i-l-w-c oncancel={handleChildCancel}></c-modal-u-i-l-w-c>
+    </template>
+</template>

@@ -1,0 +1,15 @@
+.align {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #4fa9b9;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.custom-bar {
+    --slds-c-progress-bar-track-color-background: #45a051;
+    --slds-c-progress-bar-height: 20px;
+}

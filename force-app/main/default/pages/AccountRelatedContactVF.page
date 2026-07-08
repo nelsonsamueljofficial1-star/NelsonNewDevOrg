@@ -1,0 +1,53 @@
+<!--
+* Purpose: This page is used to show Related Contact details by VF page
+* Created By: Nelson Samuel J
+* Created On: 16-06-2026
+-->
+<apex:page standardController="Account">
+<style>
+       /* Target the headers of our specific table */
+        .modern-table th {
+            background: #e2ecf6 !important;
+            background-image: none !important;
+            color: #202d5b !important;
+            font-size: 14px !important;
+            padding: 10px !important;
+        }
+        
+        /* Target the record row cells of our specific table */
+        .modern-table td {
+            font-size: 12px !important;
+            padding: 10px !important;
+        }
+        
+        a{
+            text-decoration: none;
+        }
+
+        .message{
+            background: #e2ecf6 !important;
+            color: black;
+        }
+</style>
+    <apex:pageBlock title="Customer Contacts">
+
+    <p style="padding: 10px 2px;">Below is the list of contacts associated with this account. </p>
+
+     <!-- Show Account Related Contact in Table format -->
+        <apex:pageBlockTable value="{!Account.contacts}" var="contact" styleClass="modern-table">
+
+        <!-- Contact name as Link  -->
+            <apex:column headerValue="Name">
+                <apex:outputLink value="/{!contact.Id}" target="_blank" style="color: #0176d3; text-decoration: none;">
+                    {!contact.Name}
+                </apex:outputLink>
+            </apex:column>
+            <apex:column value="{!contact.Email}" />
+            <apex:column value="{!contact.Phone}" />
+            <apex:column value="{!contact.Department}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    <apex:pageMessage severity="info" 
+              strength="1" 
+              summary="Click on the Contact Name to view the full Contact record."  />
+</apex:page>

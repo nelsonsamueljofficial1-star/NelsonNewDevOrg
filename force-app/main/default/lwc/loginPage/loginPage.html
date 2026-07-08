@@ -1,0 +1,22 @@
+<!-- * Purpose: This Html file is used to create Login page
+     * Created By: Nelson Samuel J
+     * Created On: 01-06-2026
+-->
+<template>
+    <div class="OContainer">
+        <h1>Login</h1>
+        <hr />
+        <div class="Container">
+            <lightning-input type="text" style="margin-top: 2px;" placeholder="Enter username" name="UserName"
+                label="Username" required>
+            </lightning-input>
+            <lightning-input type="password" style="margin-top: 10px;" placeholder="Enter password (min 8 characters)"
+                name="Password" label="Password" required>
+            </lightning-input>
+            <div class="btn-align">
+                <lightning-button label="Cancel" class="btn" onclick={cancelMethod}></lightning-button>
+                <lightning-button label="Generate" class="btn" onclick={SaveMethod}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

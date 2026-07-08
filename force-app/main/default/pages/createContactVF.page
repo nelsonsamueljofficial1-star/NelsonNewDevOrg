@@ -1,0 +1,37 @@
+<!--
+* Purpose: This page is used to create Contact in Account Record Page by VF page
+* Created By: Nelson Samuel J
+* Created On: 16-06-2026
+-->
+<apex:page controller="createContactVFHandler" lightningStylesheets="true" sidebar="false">
+    <style>
+        .pbSubsection{
+            padding-top: 0px;
+            width: 40%;
+        }
+    </style>
+    <apex:pageBlock title="Create New Contact" mode="maindetail">
+        <apex:form >
+            <apex:pageMessages />
+
+            <!-- Get Contact Details UI  -->
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{! newContact.FirstName }" required="true" />
+                <apex:inputField value="{! newContact.LastName }" required="true" />
+                <apex:inputField value="{! newContact.Email }" required="true" />
+                <apex:inputField value="{! newContact.Phone }" />
+                <apex:inputField value="{! newContact.Department }" />
+            </apex:pageBlockSection>
+
+            <!-- Save and Reset Buttons  -->
+            <div style="display: flex; justify-content: center; padding: 10px; width: 40%;">
+                <apex:commandButton action="{! saveContact }" value="Save Contact" style="background-color: #0070d2 !important; color: white !important; padding: 5px 16px !important;"
+                />
+                <button type="button" style="background: white !important; border: 1px solid lightgray; border-radius: 3px; color: #0070d2 !important; padding: 5px 16px !important; font-weight:900;"
+                    class="btn" onclick="this.form.reset(); return false;">
+                    Reset
+                </button>
+            </div>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

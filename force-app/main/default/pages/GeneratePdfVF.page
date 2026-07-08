@@ -1,0 +1,122 @@
+<!--
+* Purpose: This page is used to Generate PDF of Account and its related Contacts
+* Created By: Nelson Samuel J
+* Created On: 17-06-2026
+-->
+<apex:page standardController="Account" extensions="GeneratePdfExtension" renderAs="Pdf" sidebar="false">
+
+    <!-- Header  -->
+    <table style="width: 100%; border-collapse: collapse; border: none;">
+        <tr>
+            <!-- Left Side Column: Safely holds and aligns your Static Resource logo -->
+            <td style="width: 50%; text-align: left; vertical-align: middle; border: none; padding: 0;">
+                <apex:image value="{!$Resource.AcentiaLogo}" width="150" height="120" alt="Company Logo" />
+                <p style="margin-top: -38px; color: darkgrey; font-size: 10px; font-family: 'sans-serif'">innovating Solutions, Delivering Success</p>
+            </td>
+
+            <!-- Right Side Column: Dynamically aligns your text and dates to the far right -->
+            <td style="width: 50%; text-align: right; vertical-align: middle; border: none; padding: 0;">
+                <p style="margin: 0; font-weight: 800; font-family: 'sans-serif'">Account Summary Report</p>
+                <p style="margin: 4px 0 0 0; font-size: 12px; color: darkgrey; font-family: 'sans-serif'">
+                    Generated On:&#160;
+                    <apex:outputText value="{0, date, MMMM d, yyyy}">
+                        <apex:param value="{!TODAY()}" />
+                    </apex:outputText>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <hr style="border: 0; border-top: 4px solid #0c4a91; margin-top: -10px; padding: 0; width: 100%; z-index: 100; position: relative;"
+    />
+    <h1 style="text-align: center; color:#034594 ; font-family: 'sans-serif'; margin-bottom: 20px;">ACCOUNT SUMMARY</h1>
+    <img src="{!$Resource.New_Account}" width="15" height="20" style=" margin-bottom: -4px; margin-right: 8px; background-color: #034594; padding: 5px; border-radius: 15px; border: 1px solid #034594;"
+    />
+    <h4 style="display: inline; color:#0c479c; font-family: 'sans-serif'; padding-top: -6px;">ACCOUNT DETAILS</h4>
+    <hr style="margin: 0; padding: 0; border: 0; border-top: 1px solid #0c479c; margin-top: 6px; margin-bottom: 13px;" />
+
+    <!-- Account Information Data Grid Table -->
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="font-family: 'sans-serif'; padding: 6px; font-weight: 600; width: 25%;">Account Name</td>
+            <td style="padding: 6px; width: 3%;">:</td>
+            <td style="padding: 6px; width: 72%;">{!Account.Name}</td>
+        </tr>
+        <tr>
+            <td style="font-family: 'sans-serif'; padding: 6px; font-weight: 600;">Industry</td>
+            <td style="padding: 6px;">:</td>
+            <td style="padding: 6px;">{!Account.Industry}</td>
+        </tr>
+        <tr>
+            <td style="font-family: 'sans-serif'; padding: 6px; font-weight: 600;">Phone</td>
+            <td style="padding: 6px;">:</td>
+            <td style="padding: 6px;">{!Account.Phone}</td>
+        </tr>
+        <tr>
+            <td style="font-family: 'sans-serif'; padding: 6px; font-weight: 600;">Website</td>
+            <td style="padding: 6px;">:</td>
+            <td style="padding: 6px;">
+                <a href="{!Account.Website}" target="_blank" style="color: #0176d3; text-decoration: none;">{!Account.Website}</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-family: 'sans-serif'; padding: 6px; font-weight: 600; vertical-align: top;">Billing Address</td>
+            <td style="padding: 6px; vertical-align: top;">:</td>
+            <td style="padding: 6px;">
+                <apex:outputText value="{!Account.BillingStreet}" />
+                <br />
+                <apex:outputText value="{!Account.BillingCity}, {!Account.BillingState} {!Account.BillingPostalCode}" rendered="{!NOT(ISBLANK(Account.BillingCity))}"
+                />
+            </td>
+        </tr>
+    </table>
+
+    <!-- Related Contact Header  -->
+    <hr style="margin: 0; padding: 0; border: 0; border-top: 1px dotted gray; margin: 25px 0px;" />
+    <div style="margin-bottom: 11px;">
+        <img src="{!$Resource.Group}" width="15" height="15" style=" margin-bottom: -4px; margin-right: 8px; background-color: #034594; padding: 5px; border-radius: 15px; border: 1px solid #034594;"
+        />
+        <h4 style="display: inline; color:#0c479c; font-family: 'sans-serif'; padding-top: -6px; ">RELATED CONTACTS</h4>
+    </div>
+
+    <!-- Show all Related Contact in Table format -->
+    <apex:outputPanel rendered="{!intContactCount > 0}">
+        <table style="width: 100%; border-collapse: collapse; font-family: 'sans-serif'; font-size: 12px;">
+            <thead>
+                <tr style="background-color: #e2ecf6;">
+                    <th style="padding: 8px; color: #202d5b; text-align: left; border: 1px solid #d8dde6; font-weight: 600;">Contact Name</th>
+                    <th style="padding: 8px; color: #202d5b; text-align: left; border: 1px solid #d8dde6; font-weight: 600;">Email</th>
+                    <th style="padding: 8px; color: #202d5b; text-align: left; border: 1px solid #d8dde6; font-weight: 600;">Phone</th>
+                    <th style="padding: 8px; color: #202d5b; text-align: left; border: 1px solid #d8dde6; font-weight: 600;">Department</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Iterating through the child Contacts relationship list natively -->
+                <apex:repeat value="{!Account.Contacts}" var="contact">
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #d8dde6; font-weight: bold; color: #0176d3;">
+                            <a href="{!LEFT($CurrentPage.URL, FIND('/apex/', $CurrentPage.URL)) + contact.Id}" target="_blank" style="color: #0176d3; text-decoration: none;">{!contact.Name}</a>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #d8dde6;">{!contact.Email}</td>
+                        <td style="padding: 8px; border: 1px solid #d8dde6;">{!contact.Phone}</td>
+                        <td style="padding: 8px; border: 1px solid #d8dde6;">{!contact.Department}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+
+    <!-- If no contact, it show not contact message-->
+    <apex:outputPanel rendered="{!intContactCount == 0}">
+        <p style="font-family: 'sans-serif'; font-size: 12px; color: #747474; text-align: center; padding: 15px; background: #f4f6f9; border: 1px dashed #d8dde6; margin-top: 5px;">
+            No related contacts found for this account.
+        </p>
+    </apex:outputPanel>
+
+    <!-- Footer  -->
+    <hr style="margin: 0; padding: 0; border: 0; border-top: 1px solid #0c4a91; margin: 0px; margin-top: 60px;" />
+    <div style="text-align: center;">
+        <p style="font-size: 12px; color: darkgrey; font-family: 'sans-serif'; font-style: italic;">Thank you for your business!</p>
+        <p style="font-size: 10px; color: darkgrey; font-family: 'sans-serif'; font-style: italic; margin-top: -4px;">This is a system generated report and does not require a signature</p>
+    </div>
+</apex:page>

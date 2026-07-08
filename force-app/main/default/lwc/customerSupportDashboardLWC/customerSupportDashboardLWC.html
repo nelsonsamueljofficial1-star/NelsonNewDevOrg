@@ -1,0 +1,214 @@
+<!--
+* Purpose: This Html file is used to show the UI of Customer Support Dashboard
+* Created By: Nelson Samuel J
+* Created On: 15-06-2026
+-->
+<template>
+
+    <!-- Spinner Show  -->
+    <template lwc:if={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium">
+        </lightning-spinner>
+    </template>
+
+    <!-- Modal header start -->
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- modal header start -->
+                <header class="slds-modal__header" style="border-bottom: 0 !important; padding-bottom: 0px !important;">
+                    <div style="display: flex; align-items: center; padding: 15px; position: relative;">
+
+                        <div style="width: 32px;"></div>
+                        <h2 style="font-weight: bold; color: black; flex-grow: 1; text-align: center; margin: 0;">
+                            New Complaint
+                        </h2>
+                        <div style="width: 32px; display: flex; justify-content: flex-end;">
+                            <lightning-button-icon icon-name="utility:close" alternative-text="Close" size="medium"
+                                variant="bare" class="slds-icon-text-default" onclick={hideModalBox}>
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                    style="padding-top: 0px !important;">
+
+                     <!-- Record Edit Form for Case Object  -->
+                    <lightning-record-edit-form object-api-name="Case" onsuccess={handleSuccess} onerror={handleError}
+                        onsubmit={handleSubmit}>
+
+                        <template lwc:if={isLoading}>
+                            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                        </template>
+
+                        <!-- Account Picker Row -->
+                        <div class="slds-m-bottom_medium">
+                            <lightning-record-picker label="Account" placeholder="Search Accounts..."
+                                object-api-name="Account" filter={accountFilter} value={idSelectedAcc}
+                                onchange={handleAccountChange} required>
+                            </lightning-record-picker>
+                        </div>
+
+                        <!-- Contact Picker Row -->
+                        <div class="slds-m-bottom_medium">
+                            <lightning-record-picker label="Contact" placeholder="Search Contacts..."
+                                object-api-name="Contact" filter={contactFilter} value={idSelectedContact}
+                                onchange={handleContactChange} disabled={isContactDisabled} required>
+                            </lightning-record-picker>
+                        </div>
+
+                        <!-- Subject Field Row -->
+                        <div class="slds-m-bottom_medium">
+                            <lightning-input-field field-name="Subject" required variant="label-stacked"
+                                placeholder="Enter subject">
+                            </lightning-input-field>
+                        </div>
+
+                        <!-- Priority & Status -->
+                        <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Priority" variant="label-stacked">
+                                </lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Status" variant="label-stacked">
+                                </lightning-input-field>
+                            </div>
+                        </div>
+
+                        <!-- Description Field Row -->
+                        <div class="slds-m-bottom_large">
+                            <lightning-input-field field-name="Description" variant="label-stacked"
+                                placeholder="Enter description...">
+                            </lightning-input-field>
+                        </div>
+
+                        <hr style="margin: 10px 0;" />
+
+                        <!-- Buttons Row  -->
+                        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                            <lightning-button type="reset" label="Cancel" variant="neutral"
+                                style="--slds-c-button-radius-border: 4px;" onclick={hideModalBox}>
+                            </lightning-button>
+                            <lightning-button variant="brand" type="submit"
+                                style="--slds-c-button-radius-border: 4px; --slds-c-button-brand-color-background: #1b66ec; --slds-c-button-brand-color-border: #1b66ec;"
+                                label="Save" disabled={isSaveDisabled}>
+                            </lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+        </div>
+        </section>
+    </template>
+
+    <!-- Header Section Table  -->
+    <div
+        class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-around_medium slds-border_bottom">
+
+        <!-- Left Side: Icon and Title Block -->
+        <div class="slds-grid slds-grid_vertical-align-center">
+            <div class="slds-m-right_small">
+                <lightning-icon icon-name="action:new_custom14" alternative-text="Customer Support" size="medium"
+                    variant="brand">
+                </lightning-icon>
+            </div>
+            <div>
+                <h1 class="slds-text-heading_large" style=" font-weight: bold; color: black; margin: 0;">
+                    Customer Support Dashboard
+                </h1>
+            </div>
+        </div>
+
+        <!-- Right Side: Action Buttons Block -->
+        <div class="slds-grid slds-grid_vertical-align-center">
+            <button onclick={handleClick} name="Create"
+                style="padding: 10px 18px; border: 0; border-radius: 5px; color: white; background-color: #005df0;"
+                class="slds-m-right_small">
+                + Create Complaint
+            </button>
+            <button onclick={handleCloseSelected} name="Close"
+                style="padding: 10px 18px; border: 0; border-radius: 5px; color: white; background-color: #1c923c;">
+                Close Complaints
+            </button>
+        </div>
+    </div>
+
+    <!-- Metrics Section  -->
+    <div class="slds-grid slds-gutters_small slds-wrap" style="margin-top: 10px;">
+
+        <!-- Open Cases Card -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-m-bottom_small">
+            <div style="background-color: #f2f7fd; border: 1px solid grey; border-radius: 8px; padding: 20px;"
+                class="slds-p-around_medium" onclick={handleCardClick}>
+                <div class="slds-text-title_bold" style="color: black;">Open</div>
+                <div style="color: #075bce;">{intOpenCount}</div>
+            </div>
+        </div>
+
+        <!-- In Progress Card -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-m-bottom_small">
+            <div style="background-color: #f4f9f5; border: 1px solid grey; border-radius: 8px; padding: 20px;"
+                class=" slds-p-around_medium" onclick={handleCardClick}>
+                <div class="slds-text-title_bold" style="color: #569b6c;">In Progress</div>
+                <div style="color: #217f3d;">{intInProgressCount}</div>
+            </div>
+        </div>
+
+        <!-- Escalated Card -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-m-bottom_small">
+            <div style="background-color: #fef9f3; border: 1px solid grey; border-radius: 8px; padding: 20px;"
+                class="slds-p-around_medium" onclick={handleCardClick}>
+                <div class="slds-text-title_bold" style="color: #f29e48;">Escalated</div>
+                <div style="color: #df790c;">{intEscalatedCount}</div>
+            </div>
+        </div>
+
+        <!-- Closed Card -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-m-bottom_small">
+            <div style="background-color: #faf7fe; border: 1px solid grey; border-radius: 8px; padding: 20px;"
+                class="slds-p-around_medium" data-status="Closed" onclick={handleCardClick}>
+                <div class="slds-text-title_bold" style="color: #5b43a1;">Closed</div>
+                <div style="color: #5120b0;">{intClosedCount}</div>
+            </div>
+        </div>
+
+        <!-- Total Card -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5 slds-m-bottom_small">
+            <div style="background-color: #fcfcfc; border: 1px solid black; border-radius: 8px; padding: 20px;"
+                class="slds-p-around_medium" data-status="Total" onclick={handleCardClick}>
+                <div class="slds-text-title_bold" style="color: #606069;">Total</div>
+                <div style="color: black;">{intTotalCount}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section  -->
+    <div
+        style="background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden;">
+
+        <!-- Table Header -->
+        <div style="padding: 16px 24px; border-bottom: 1px solid #f1f5f9; background-color: white;">
+            <h3 class="slds-text-heading_small" style="font-weight: bold; color: #1e293b; margin: 0;">Complaint List
+            </h3>
+        </div>
+
+        <div style="height: 400px; width: 100%; position: relative;">
+            <div class="slds-scrollable_y" style="height: 100%; width: 100%;">
+
+                <lightning-datatable key-field="id" data={lstComplaints} columns={lstComplaintColumns}
+                    onrowselection={handleRowSelection} class="slds-table_header-fixed">
+                </lightning-datatable>
+
+            </div>
+        </div>
+
+    </div>
+</template>

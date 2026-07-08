@@ -1,0 +1,81 @@
+<!-- * Purpose: This Html file is used to manage opportunity from account record page
+     * Created By: Nelson Samuel J
+     * Created On: 02-06-2026
+-->
+<template>
+    <h1 class="slds-text-heading_large slds-text-align_center">Related Opportunity Details</h1>
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- modal header start -->
+                <header class="slds-modal__header" style="text-align: center;">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={hideModalBox}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="destructive"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit {strCurrentOppName}
+                    </h2>
+                </header>
+
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-edit-form object-api-name="Opportunity" record-id={idOppId}
+                        onsuccess={handleSuccess} onerror={handleError} onsubmit={handleSubmit} onload={handleLoad}>
+                        <template lwc:if={isLoading}>
+                                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+
+                            <!-- <div class="slds-backdrop slds-backdrop_open"></div>
+                            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000;">
+                                <lightning-spinner alternative-text="Loading" size="medium"
+                                    ></lightning-spinner>
+                            </div>
+                            </lightning-spinner> -->
+
+                        </template>
+                        <lightning-input-field field-name="Name"> </lightning-input-field>
+                        <lightning-input-field field-name="StageName"> </lightning-input-field>
+                        <lightning-input-field field-name="Amount"> </lightning-input-field>
+                        <lightning-input-field field-name="CloseDate"> </lightning-input-field>
+                        <div class="slds-var-m-top_medium" style="display: flex; justify-content: flex-end;">
+                            <lightning-button type="reset" label="Cancel" variant="Neutral" class="slds-m-right_small"
+                                onclick={hideModalBox}>
+                            </lightning-button>
+                            <lightning-button variant="brand" type="submit" label="Save" disabled={isLoading}>
+                            </lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+
+                <!-- modal footer start
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="Neutral" style="--slds-c-button-radius-border: 2px;"
+                        class="slds-m-right_small" onclick={hideModalBox}></lightning-button>
+                    <lightning-button label="Add" variant="Brand" style="--slds-c-button-radius-border: 2px;"
+                        onclick={handleData}></lightning-button>
+                </footer> -->
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+        </div>
+        </section>
+    </template>
+
+
+    <!-- Show Opportunities if available -->
+    <template lwc:if={bolHasOpportunities}>
+        <lightning-datatable class="slds-m-around_medium" key-field="Id" data={lstOpportunities}
+            columns={lstOpportunityColumns} hide-checkbox-column="true" onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </template>
+
+    <template lwc:else> <!-- Show No Opportunities message if not available -->
+        <h1 class="slds-text-heading_large slds-text-align_center">No Opportunities found for
+            this Account.</h1>
+    </template>
+</template>

@@ -1,0 +1,186 @@
+<!-- * Purpose: This Html file is used to create Pdf print Config Setup
+     * Created By: Nelson Samuel J
+     * Created On: 27-05-20226
+     -->
+<template>
+    <lightning-card>
+        <h1 class="head">Customer PDF Print Configuration Setup</h1>
+        <hr />
+        <div class="In-Container">
+            <lightning-layout multiple-rows>
+
+                <!-- Row 1 -->
+                <lightning-layout-item size="6" class="head1">
+                    <h3>PDF Type</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head2">
+                    <h3>Proposal PDF</h3>
+                </lightning-layout-item>
+
+                <!-- Row 2 -->
+                <lightning-layout-item size="6" class="pt-15">
+                    <lightning-input type="radio" label="Proposal PDF" name="pdfGroup" value="Proposal PDF">
+                    </lightning-input>
+                    <lightning-input type="radio" label="Avails Reports" name="pdfGroup" value="Avails Reports"
+                        class="pt-10">
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="pt-15"></lightning-layout-item>
+
+                <!-- Row 3-->
+                <lightning-layout-item size="6" class="head1 mt-15">
+                    <h3>PDF Print COnfiguration Type</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head2 pb-30 mt-15">
+                </lightning-layout-item>
+
+                <!-- Row 4 -->
+                <lightning-layout-item size="6" class="pt-15">
+                    <lightning-input type="radio" label="Blocking Chart with Key Market Ratings" name="pdfPrintGroup"
+                        value="Blocking Chart with Key Market Ratings">
+                    </lightning-input>
+                    <lightning-input type="radio" label="Blocking Chart with Audience TC" name="pdfPrintGroup"
+                        value="Blocking Chart with Audience TC" class="pt-10">
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="pt-15"></lightning-layout-item>
+
+                <!-- Row 5-->
+                <lightning-layout-item size="12" class="head1 mt-30">
+                    <h3>Sorting order for Customer PDF</h3>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+            <!-- Row 6 -->
+            <lightning-layout class="custom-grid-gap">
+                <lightning-layout-item size="6" class="head21 " >
+                    <h3>Sorting order for TV Submission</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head22">
+                    <h3 >Sorting order for Digital Submission</h3>
+                </lightning-layout-item>
+            </lightning-layout>
+
+
+            <lightning-layout multiple-rows>
+
+                <!-- Row 7 -->
+                <lightning-layout-item size="2" class="pt-15">
+                    <label>Primary Sorting Fields: </label>
+                    <lightning-helptext content="Kindly Enter a Data" variant="inverse"></lightning-helptext>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="pt-10">
+                    <div class="flex-align">
+                        <lightning-combobox name="Default" variant="label-hidden" class="w-40" placeholder="Default">
+                        </lightning-combobox>
+                        <lightning-input type="radio" label="ASC" name="pSort" value="ASC">
+                        </lightning-input>
+                        <lightning-input type="radio" label="DESC" name="pSort" value="DESC">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="pt-15 l-p-10">
+                    <label>Primary Sorting Fields: </label><lightning-helptext content="Kindly Enter a Data"
+                        variant="inverse"></lightning-helptext>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="pt-10">
+                    <div class="flex-align2 l-p-10">
+                        <lightning-combobox name="Default" variant="label-hidden" class="w-40" placeholder="Default">
+                        </lightning-combobox>
+                        <lightning-input type="radio" label="ASC" name="pSort" value="ASC">
+                        </lightning-input>
+                        <lightning-input type="radio" label="DESC" name="pSort" value="DESC">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+
+                <!-- Row 8 -->
+                <lightning-layout-item size="2" class="pt-15">
+                    <label>Secondary Sorting Fields: </label>
+                    <lightning-helptext content="Kindly Enter a Data" variant="inverse"></lightning-helptext>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="pt-20">
+                    <div class="flex-align l-p-20 pt-10">
+                        <lightning-combobox name="Select Sorting Field" disabled="true" variant="label-hidden"
+                            class="w-53" placeholder="Select Sorting Field">
+                        </lightning-combobox>
+                        <lightning-input type="radio" label="ASC" name="pSort" value="ASC">
+                        </lightning-input>
+                        <lightning-input type="radio" label="DESC" name="pSort" value="DESC">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" class="pt-15 l-p-10">
+                    <label>Secondary Sorting Fields: </label> <lightning-helptext content="Kindly Enter a Data"
+                        variant="inverse"></lightning-helptext>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" class="pt-10">
+                    <div class="flex-align2" style="margin-left: -50px;">
+                        <lightning-combobox name="Select Sorting Field" disabled="true" variant="label-hidden"
+                            class="w-53" placeholder="Select Sorting Field">
+                        </lightning-combobox>
+                        <lightning-input type="radio" label="ASC" name="pSort" value="ASC">
+                        </lightning-input>
+                        <lightning-input type="radio" label="DESC" name="pSort" value="DESC">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+
+                <!-- Row 9 -->
+                <lightning-layout-item size="6" class="head122 mt-15">
+                    <h3>Show/Hide Options</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head212 mt-15">
+                    <div class="flex-alignlast1 l-p-10">
+                        <lightning-input type="checkbox" label="BroadCast Pattern" name="BroadCast Pattern">
+                        </lightning-input>
+                        <lightning-input type="checkbox" label="Sorting Order" name="Sorting Order">
+                        </lightning-input>
+                        <lightning-input type="checkbox" label="Discount" name="Discount">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+
+                <!-- Row 10 -->
+                <lightning-layout-item size="6" class="head1 mt-5">
+                    <h3>Prime/Fringe</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head211 mt-5">
+                    <div class="flex-align">
+                        <lightning-input type="checkbox" label="Prime/Fringe" name="Prime/Fringe">
+                        </lightning-input>
+                        <lightning-input type="radio" label="%GRPS" name="%GRPS" value="%GRPS">
+                        </lightning-input>
+                        <lightning-input type="radio" label="Dollars" name="Dollars" value="Dollars">
+                        </lightning-input>
+                        <lightning-input type="radio" label="Spots" name="Spots" value="Spots">
+                        </lightning-input>
+                        <lightning-input type="radio" label="GRPS" name="GRPS" value="GRPS">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+
+                <!-- Row 11 -->
+                <lightning-layout-item size="6" class="head1 mt-5">
+                    <h3>Monthly Summary</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head211 mt-5">
+                    <lightning-input type="checkbox" label="Include Monthly Summary?" name="Include Monthly Summary?">
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <!-- Row 12 -->
+                <lightning-layout-item size="6" class="head1 mt-5">
+                    <h3>Digital Submission</h3>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="head211 mt-5">
+                    <lightning-input type="checkbox" label="Include Unit Price?" name="PInclude Unit Price?">
+                    </lightning-input>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+        </div>
+    </lightning-card>
+</template>

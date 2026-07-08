@@ -1,0 +1,10 @@
+<template>
+    <h1>List of Task</h1>
+    <template lwc:if={isDataAvailable}>
+        <lightning-datatable key-field="id" data={arrTaskData} columns={columns1}>
+        </lightning-datatable>
+    </template>
+    <template lwc:else>
+        <h2>No tasks available.</h2>
+    </template>
+</template>

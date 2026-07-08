@@ -1,0 +1,93 @@
+<!--
+* Purpose: This Html file is used to show the UI of Case Create Screen in Quick action
+* Created By: Nelson Samuel J
+* Created On: 13-06-2026
+-->
+<template>
+
+    <!-- Spinner Show  -->
+    <template lwc:if={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium">
+        </lightning-spinner>
+    </template>
+
+    <!-- Header  -->
+    <div style="display: flex; align-items: center;position: relative; padding: 15px;">
+
+        <div style="width: 32px;"></div>
+        <h2 style="font-weight: bold; color: black; flex-grow: 1; text-align: center; margin: 0;">
+            New Case
+        </h2>
+        <div style="width: 32px; display: flex; justify-content: flex-end;">
+            <lightning-button-icon icon-name="utility:close" alternative-text="Close" size="medium" variant="bare"
+                class="slds-icon-text-default" onclick={handleClose}>
+            </lightning-button-icon>
+        </div>
+    </div>
+    <hr style="margin: 0;" />
+
+    <!-- Input Datas  -->
+    <div class="slds-p-horizontal_large slds-p-vertical_small">
+        <!-- <lightning-input type="text" label="Account" disabled="true" value={idAccRecord}></lightning-input> -->
+        <lightning-record-edit-form object-api-name="Case" onload={handleOnLoad}>
+            <div style="padding-bottom: 4px;">
+                <div style="margin-bottom: 5px;">
+                    <label style="padding-bottom: 5px;">Account</label>
+                </div>
+                <lightning-input-field field-name="AccountId" disabled="true" variant="label-hidden"
+                    value={idAccRecord}></lightning-input-field>
+            </div>
+            <div style="margin-bottom: 4px;">
+                <lightning-combobox name="progress" label="Contact" value={strSelectedCon} options={lstContactOption}
+                    onchange={handleChange} disabled={boldisableContact}></lightning-combobox>
+                <div class="slds-hide">
+                    <lightning-input-field field-name="ContactId" value={strSelectedCon}></lightning-input-field>
+                </div>
+            </div>
+            <div style="padding-bottom: 4px;">
+                <div style="margin-bottom: 5px;">
+                    <label style="padding-bottom: 5px;">Subject</label>
+                </div>
+                <lightning-input-field variant="label-hidden" field-name="Subject" required></lightning-input-field>
+            </div>
+
+            <div style="padding-bottom: 4px;">
+                <div style="margin-bottom: 5px;">
+                    <label style="padding-bottom: 5px;">Description</label>
+                </div>
+                <lightning-input-field field-name="Description" variant="label-hidden" required></lightning-input-field>
+            </div>
+
+            <div style="display: flex; justify-content: center; ">
+                <div style="width: 50%; padding-right:5px ;">
+                    <div style="padding-bottom: 4px;">
+                        <div style="margin-bottom: 5px;">
+                            <label style="padding-bottom: 5px;">Priority</label>
+                        </div>
+                        <lightning-input-field field-name="Priority" variant="label-hidden"
+                            required></lightning-input-field>
+                    </div>
+                </div>
+                <div style="width: 50%; padding-left:5px ;">
+                    <div style="padding-bottom: 4px;">
+                        <div style="margin-bottom: 5px;">
+                            <label style="padding-bottom: 5px;">Status</label>
+                        </div>
+                        <lightning-input-field field-name="Status" variant="label-hidden"
+                            required></lightning-input-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons  -->
+            <div style="display: flex; justify-content: flex-end; gap: 5px; padding-top: 5px;">
+                <lightning-button variant="neutral" name="Cancel" label="Cancel"
+                    style="--slds-c-button-radius-border: 3px;" onclick={handleClick}></lightning-button>
+                <lightning-button variant="neutral" label="Save & New" name="SaveNew"
+                    style="--slds-c-button-radius-border: 3px;" onclick={handleClick}></lightning-button>
+                <lightning-button variant="brand" label="Save" name="Save" style="--slds-c-button-radius-border: 3px;"
+                    onclick={handleClick}></lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </div>
+</template>

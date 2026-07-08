@@ -1,0 +1,33 @@
+<!-- * Purpose: This Html file is used to show the hierarchical relationship between records in a child relationship
+     * Created By: Nelson Samuel J
+     * Created On: 05-06-2026
+-->
+<template>
+    <!-- Grid to show child records related to the parent record -->
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-3 slds-p-around_medium"
+            style="border: 1px solid grey; border-radius: 5px;">
+            <h2 class="slds-text-heading_small childOneCls slds-font-weight_bold">Child One </h2>
+            <div class="slds-m-top_x-small">
+                <lightning-button label={childOneLabel} variant="success" name="Child-One" class="slds-m-top_x-small"
+                    onclick={childAction}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-p-around_medium"
+            style="border: 1px solid grey; border-radius: 5px;">
+            <h2 class="slds-text-heading_small childTwoCls slds-font-weight_bold">Child Two </h2>
+            <div class="slds-m-top_x-small">
+                <lightning-button label={childTwoLabel} variant="success" name="Child-Two" class="slds-m-top_medium"
+                    onclick={childAction}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-p-around_medium"
+            style="border: 1px solid grey; border-radius: 5px;">
+            <h2 class="slds-text-heading_small childThreeCls slds-font-weight_bold">Child Three </h2>
+            <div class="slds-m-top_x-small">
+                <lightning-button label={childThreeLabel} variant="success" name="Child-Three"
+                    onclick={childAction}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

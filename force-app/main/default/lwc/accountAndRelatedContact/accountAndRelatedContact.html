@@ -1,0 +1,36 @@
+<!-- * Purpose: This Html file is used to show the Account and related contact details in the Home page of the user.
+     * Created By: Nelson Samuel J
+     * Created On: 05-06-2026
+-->
+<template>
+     <lightning-card icon-name="standard:account">
+
+          <!-- Header for the Account and Related Contact Details -->
+          <div slot="title">
+               <strong>Account and Related Contact Details</strong>
+          </div>
+          <template lwc:if={isAccountList}>
+
+               <!-- Show Account and related contact details in the accordion format. -->
+               <lightning-accordion allow-multiple-sections-open>
+                    <template for:each={lstAccountAndRelatedContactDetails} for:item="account">
+                         <lightning-accordion-section name={account.Id} key={account} label={account.Name}>
+                              <template lwc:if={account.Contacts}>
+                                   <template for:each={account.Contacts} for:item="contact">
+                                        <p key={contact.Id}>Name: <a href="#" data-id={contact.Id}
+                                                  onclick={handleContactClick}>{contact.Name}
+                                             </a></p>
+                                   </template>
+                              </template>
+                              <template lwc:else>
+                                   <p>No related contacts found.</p>
+                              </template>
+                         </lightning-accordion-section>
+                    </template>
+               </lightning-accordion>
+          </template>
+          <template lwc:else>
+               <p>No accounts found.</p>
+          </template>
+     </lightning-card>
+</template>

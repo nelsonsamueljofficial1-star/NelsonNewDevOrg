@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    margin: 10px;
+}
+
+h2 {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    background-color: red;
+    color: white;
+}

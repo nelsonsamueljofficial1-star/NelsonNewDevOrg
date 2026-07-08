@@ -1,0 +1,11 @@
+<!--
+* Purpose: This Html file is used to create Parent Account Record Details
+* Created By: Nelson Samuel J
+* Created On: 02-06-2026
+-->
+<template>
+    <lightning-button label="Show Account" name="Show Account" variant="brand" onclick={actionHandler}></lightning-button>
+    <template lwc:if={bolIsDataAvailable}>
+        <c-child-account-l-w-c obj-child-account={objAccount}></c-child-account-l-w-c>
+    </template>
+</template>

@@ -1,0 +1,113 @@
+<!--
+* Purpose: This Html file is used to show the UI of multiple Contacts
+* Created By: Nelson Samuel J
+* Created On: 12-06-2026
+-->
+<template>
+    <div class="slds-is-relative" style="background-color: white;">
+        <!-- Spinner Show  -->
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium">
+            </lightning-spinner>
+        </template>
+
+        <!-- Header of Quick Action  -->
+        <div style="display: flex; justify-content:space-between; padding: 15px; background-color: #0063d1;">
+            <h2 class="slds-text-heading_small" style="font-weight: bold; color: white;">Add Multiple Contacts</h2>
+            <lightning-button-icon icon-name="utility:close" alternative-text="Close" size="medium"
+                variant="bare-inverse" onclick={handleClose} style="color: white;"></lightning-button-icon>
+        </div>
+
+        <lightning-layout style="padding: 10px 20px; padding-top: 18px;">
+            <lightning-layout-item size="2" style="margin-top: 5px;"> <label> <strong>Account
+                        Name</strong></label></lightning-layout-item>
+            <lightning-layout-item size="6">
+                <lightning-record-edit-form record-id={recordId} object-api-name="Account" mode="view">
+                    <lightning-input-field field-name="Name" disabled="true" variant="label-hidden">
+                    </lightning-input-field>
+                </lightning-record-edit-form>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" style="display: flex; justify-content: flex-end;">
+                <lightning-button variant="brand" label="+ Add Row" onclick={handleAddRow}
+                    style="--slds-c-button-radius-border: 3px;"></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <hr style="margin: 10px 0px; margin-bottom: 2px;" />
+
+        <template lwc:if={hasRow}>
+
+            <!-- Make scrollable y axis -->
+            <div class="slds-scrollable_y" style="height: 220px; padding: 0px 10px;">
+                <table cellpadding="12">
+
+                    <!-- Header of the Table -->
+                    <thead>
+                        <tr>
+                            <th style="border: 0; border-bottom: 2px solid #dddbda;">
+                                <div>First Name</div>
+                            </th>
+                            <th style="border: 0; border-bottom: 2px solid #dddbda;">
+                                <div>Last Name <span style="color: red;">*</span></div>
+                            </th>
+                            <th scope="col" style="border: 0; border-bottom: 2px solid #dddbda;">
+                                <div>Email <span style="color: red;">*</span></div>
+                            </th>
+                            <th scope="col" style="border: 0; border-bottom: 2px solid #dddbda;">
+                                <div>Gender</div>
+                            </th>
+                            <th scope="col" style="border: 0; border-bottom: 2px solid #dddbda; width: 50px;">
+                                <div></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Show all input field -->
+                        <template for:each={lstRowData} for:item="row" for:index="index">
+                            <tr key={row.key} class="slds-p-around_medium">
+
+                                <td style="border: 0; border-bottom: 1px solid #dddbda;">
+                                    <lightning-input type="text" variant="label-hidden" data-id={row.key}
+                                        placeholder="First name" data-field="FirstName" value={row.FirstName}
+                                        onchange={handleInputChange} required></lightning-input>
+                                </td>
+                                <td style="border: 0; border-bottom: 1px solid #dddbda;">
+                                    <lightning-input type="text" variant="label-hidden" label="Last Name"
+                                        data-id={row.key} placeholder="Last name" data-field="LastName"
+                                        value={row.LastName} onchange={handleInputChange} required></lightning-input>
+                                </td>
+                                <td style="border: 0; border-bottom: 1px solid #dddbda;">
+                                    <lightning-input type="email" variant="label-hidden" label="Email" data-id={row.key}
+                                        data-field="Email" value={row.Email} onchange={handleInputChange}
+                                        placeholder="email@example.com" required></lightning-input>
+                                </td>
+                                <td style="border: 0; border-bottom: 1px solid #dddbda;">
+                                    <lightning-combobox variant="label-hidden" label="Gender" data-id={row.key}
+                                        data-field="Gender__c" value={row.Gender__c} options={genderOptions}
+                                        placeholder="--None--" onchange={handleInputChange}
+                                        required></lightning-combobox>
+                                </td>
+                                <td style="border: 0; border-bottom: 1px solid #dddbda; text-align: center;">
+
+                                    <!-- Delete Action  -->
+                                    <lightning-button-icon icon-name="utility:delete" alternative-text="Delete Row"
+                                        variant="bare" data-id={row.key} onclick={handleDeleteRow}
+                                        class="slds-icon-text-error" size="medium"></lightning-button-icon>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <hr style="margin: 10px 0px;" />
+        <div style="padding: 10px; display: flex; justify-content: flex-end; gap: 10px;">
+            <!-- Footer Actions -->
+            <lightning-button variant="neutral" label="Cancel" name="Cancel" onclick={handleClick}
+                style="--slds-c-button-radius-border: 3px;"></lightning-button>
+            <lightning-button variant="brand" label="Save" name="Save" onclick={handleClick}
+                style="--slds-c-button-radius-border: 3px; "></lightning-button>
+        </div>
+    </div>
+</template>

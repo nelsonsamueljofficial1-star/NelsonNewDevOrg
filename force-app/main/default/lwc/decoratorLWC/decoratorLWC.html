@@ -1,0 +1,29 @@
+<!-- * Purpose: This Html file is used to create Decorator Eg
+     * Created By: Nelson Samuel J
+     * Created On: 30-05-20226
+-->
+
+<template>
+    <lightning-card style="background-color: white;">
+        <div class="container">
+            <h1>Account Record</h1>
+            <ul>
+                <template lwc:if={bolIsDataAvailable}>
+                    <template for:each={accountRecord} for:item="data">
+                        <li key={data.fields.Id}>Account Name: {data.fields.Name.value}</li>
+                        <li key={data.fields.Id}>Phone: {data.fields.Phone.value}</li>
+                        <li key={data.fields.Id}>Industry: {data.fields.Industry.value}</li>
+                        <li key={data.fields.Id}>Current Page Reference Id : {RecordID}</li>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <li>No record data available</li>
+                </template>
+            </ul>
+            <div class="btn-1">
+                <lightning-button label="View Full Record" onclick={handleButtonClick}></lightning-button>
+                <lightning-button label="View Contact List" onclick={handleButtonClick2}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

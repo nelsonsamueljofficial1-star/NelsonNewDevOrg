@@ -1,0 +1,77 @@
+<!-- * Purpose: This Html file is used to show the Data in Path LWC format
+     * Created By: Nelson Samuel J
+     * Created On: 09-06-2026
+-->
+<template>
+    <lightning-card>
+
+        <!-- Spinner Show  -->
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" >
+            </lightning-spinner>
+        </template>
+        <div class="slds-m-around_small slds-p-around_medium">
+            <h1 style="font-weight: bold; margin-bottom: 2px;">Select the Sobject and Field and create the Sobject
+                Records</h1>
+
+            <!-- Path UI  -->
+            <lightning-progress-indicator current-step={strPathValue} type="path" variant="base">
+
+                <!-- Object and Field selection UI -->
+                <lightning-progress-step label="Open" value="1">
+                </lightning-progress-step>
+                <lightning-progress-step label="Select Fields" value="2"></lightning-progress-step>
+                <lightning-progress-step label="Open Form-Save Record Closed the Form"
+                    value="3"></lightning-progress-step>
+            </lightning-progress-indicator>
+
+            <!-- Form Show  -->
+            <template lwc:if={hasFormOpen}>
+                <div class="slds-m-around_medium" style="width: 300px;">
+                    <lightning-record-edit-form object-api-name={strObjectName} onsuccess={handleSucess}
+                        onerror={handleError} onsubmit={handleSubmit} onload={handleLoad}>
+                        <template for:each={lstSelectedFields} for:item="fields">
+                            <div key={fields} class="slds-m-top_small">
+                                <lightning-input-field field-name={fields}></lightning-input-field>
+                            </div>
+                        </template>
+                        <div class="sds-m-top_small">
+                            <lightning-button type="submit" label="Create Record" variant="brand"></lightning-button>
+                            <lightning-button type="reset" label="Cancel" class="slds-m-left_small"
+                                onclick={hanldeCancel}></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+
+            <!-- Step 1 and Step 2 Fields show  -->
+            <template lwc:else>
+                <div style="margin-top: 40px;">
+                    <lightning-layout>
+                        <lightning-layout-item size="2">
+                            <lightning-combobox name="Sobject" label="Sobject" style="width: 140px; margin-left: 40px;"
+                                placeholder="Select the Object" options={lstObjectOptions} 
+                                onchange={handleChange}></lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2">
+                            <lightning-combobox name="SobjectFields" style="width: fit-content" label="Sobject Fields"
+                                placeholder="Select the Fields" options={lstObjectFields} disabled={bolFieldDisable}
+                                onchange={handleChange}></lightning-combobox>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <template lwc:if={bolFieldSelect}>
+                    <p style="font-weight: bold;color: black;">What are the Fields Selected from Object:
+                        <template for:each={lstSelectedFieldsUI} for:item="field">
+                            <span key={field}>{field},</span>
+                        </template>
+                    </p>
+                </template>
+                <div class="slds-m-around_medium "
+                    style="display: flex; margin-top: 2px; justify-content: end; margin-right: 180px;">
+                    <lightning-button label="Open Form" variant="brand" onclick={handleForm} disabled={bolFormDisable}></lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

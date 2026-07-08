@@ -1,0 +1,94 @@
+<!-- * Purpose: This Html file is used to show the Booking Process needed field
+     * Created By: Nelson Samuel J
+     * Created On: 08-06-2026
+-->
+<template>
+
+    <lightning-card>
+
+        <!-- Spinner Show -->
+        <template lwc:if={bolhasSpinner}>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Booking Process Details -->
+        <div style="padding: 10px;">
+            <h1 class="slds-text-heading_large "> Booking Process</h1>
+
+            <!-- Using Lightning Record Edit Form  -->
+            <lightning-record-edit-form object-api-name="Train_Booking__c" onload={handleLoad}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Train_Name__c" onchange={handleTrainChange} required>
+                        </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Name__c" required> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Date_of_Birth__c"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Email__c"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Phone__c"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Gender__c"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Travelling_Date__c" required> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="From__c" required> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="To__c" required> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Additional_Booking_Count__c" value={intBookingCount}
+                            onchange={handleBookingCount}> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Fare__c" value={intFareValue} readonly>
+                        </lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-record-edit-form>
+
+            <!-- Shows Additional Booking Person  -->
+            <div style="padding: 0px; padding-top: 2px;">
+                <template lwc:if={hasAdditionalBookCount}>
+                    <h1 class="slds-text-heading_large">Additional Booking Person Details</h1>
+                    <template for:each={lstAddCount} for:item="data" for:index="id">
+                        <div key={data}>
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="4">
+                                    <lightning-input type="text" data-id={id} required data-type="passenger-name"
+                                        label="Name"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="4">
+                                    <lightning-input type="date" data-id={id} required data-type="passenger-dob"
+                                        label="Date of Birth"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="4">
+                                    <lightning-combobox data-id={id} options={genderOptions} required
+                                        data-type="passenger-gender" label="Gender"></lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+            <!-- Submit and Reset Button -->
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                <lightning-button label="Submit" variant="brand" style="--slds-c-button-radius-border: 3px;"
+                    onclick={handleSubmit}></lightning-button>
+                <lightning-button label="Cancel" variant="brand"
+                    style="--slds-c-button-radius-border: 3px;"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,22 @@
+<!-- * Purpose: This Html file is used to show the hirarchical relationship between records in a parent-child relationship
+     * Created By: Nelson Samuel J
+     * Created On: 02-06-2026
+-->
+<template>
+    <div class="slds-p-around_large" style="border: 1px solid grey; border-radius: 5px;">
+        <h1 class="slds-text-heading_small slds-font-weight_bold">Parent</h1>
+        <!-- Grid to show child records related to the parent record -->
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-3">
+                <p>Child One {childOneData}</p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <p>Child Two {childTwoData}</p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <p>Child Three {childThreeData}</p>
+            </div>
+        </div>
+        <c-child-hierarchical-management obj-chil-datas-api={objChildDatas} onsenddatatoparent={handleChildData}></c-child-hierarchical-management>
+    </div>
+</template>

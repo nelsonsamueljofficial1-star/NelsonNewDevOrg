@@ -1,0 +1,106 @@
+<!-- * Purpose: This Html file is used to show the Intelligent Data Search component in the App page of the user.
+     * Created By: Nelson Samuel J
+     * Created On: 06-06-2026
+-->
+<template>
+    <!-- Open Popup -->
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- modal header start -->
+                <header class="slds-modal__header" style="text-align: center;">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleHide}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="error"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">How it works?</h2>
+                </header>
+
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <h1 class="slds-text-heading_medium">Explanation</h1>
+                    <p>Kindly Enter Select query with correct syntax, you will get output in Table format</p>
+                    <p>Eg</p>
+                    <p>SELECT (Fields) FROM (Object name)</p>
+                    <p>Thank You</p>
+                </div>
+
+                <!-- modal footer start-->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="Neutral" style="--slds-c-button-radius-border: 2px;"
+                        class="slds-m-right_small" onclick={handleHide}></lightning-button>
+                </footer>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+    <div class="slds-p-around_medium" style="display: flex; justify-content:space-between;">
+        <div style="display:flex;">
+            <div style="display:flex; align-items:center;">
+                <lightning-icon icon-name="utility:sparkles" variant="inverse"
+                    style="background: #5e36ce; padding: 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center;"
+                    alternative-text="sparkles" size="medium" title="sparkles">
+                </lightning-icon>
+            </div>
+            <div class="slds-m-left_small">
+                <h1 class="slds-text-heading_medium">Intelligent Data Search</h1>
+                <p>Run your SOQL query and get results instantly.</p>
+            </div>
+        </div>
+        <div>
+            <lightning-button variant="neutral" label="How it works" icon-name="utility:info" onclick={handleHowWork}
+                icon-variant="neutral"></lightning-button>
+        </div>
+    </div>
+    <div class="slds-p-around_medium slds-m-bottom_small" style="background-color: white; border-radius:5px;">
+        <div style="display: flex; gap:10px;">
+            <div style=" width:80%">
+                <lightning-textarea name="soqlQuery" label=" Enter SOQL Query"
+                    placeholder="e.g. SELECT Id, Name FROM Account" onchange={handleInputChange} rows="10"
+                    style="height: 80px;"></lightning-textarea>
+            </div>
+            <div style="margin-top: auto;">
+                <lightning-button variant="brand" label="Run Query" onclick={handleRunQuery}
+                    icon-name="utility:right"></lightning-button>
+                <lightning-button variant="neutral" label="Clear" onclick={handleClear} icon-name="utility:refresh"
+                    class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </div>
+    <div class="slds-m-top_medium slds-p-around_medium" style="background-color: white; border-radius:5px;">
+        <strong>Query Results</strong>
+        <template lwc:if={hasResults}>
+            <span style="margin-left: 30px; padding: 6px 10px; border-radius: 20px; background-color: #f2f5fa;">Object:
+                <span style="color: blue">{objectApiName}</span></span>
+            <span style="margin-left: 10px; padding: 6px 10px; border-radius: 20px; background-color: #f2f5fa;">Total
+                Records: <span style="color: blue">{lstAllQueryResults.length}</span></span>
+            <div class="slds-m-top_small">
+                <lightning-datatable class="slds-m-top_small" data={lstQueryResults} columns={lstColumns} key-field="id"
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </div>
+        </template>
+        <template lwc:elseif={hasError}>
+            <p class="slds-text-color_error slds-m-top_medium">{strError}</p>
+        </template>
+        <template lwc:if={hasResults}>
+            <div class="slds-align_absolute-center slds-m-top_medium">
+                <lightning-button label="Previous" onclick={handlePrevious}
+                    disabled={isPreviousDisabled}></lightning-button>
+                <span class="slds-m-horizontal_medium">Page {currentPage} of {totalPages}</span>
+                <lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+            </div>
+        </template>
+        <template lwc:if={isLoading}>
+            <div style="display: flex; justify-content: center; padding: 20px;">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+    </div>
+</template>

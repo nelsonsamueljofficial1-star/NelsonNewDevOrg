@@ -1,0 +1,21 @@
+<!-- * Purpose: This Html file is used to create Case creation Page
+     * Created By: Nelson Samuel J
+     * Created On: 02-06-2026
+-->
+<template>
+    <lightning-card>
+        <lightning-record-edit-form object-api-name="Case" onsubmit={handleSubmit}>
+            <lightning-input-field field-name="Subject" required=""></lightning-input-field>
+            <lightning-input-field field-name="Description" required=""></lightning-input-field>
+            <lightning-input-field field-name="Status"></lightning-input-field>
+            <lightning-input-field field-name="Priority" required></lightning-input-field>
+            <lightning-input-field field-name="Origin" required></lightning-input-field>
+            <lightning-input-field field-name="ContactId" required value={recordId}></lightning-input-field>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                <lightning-button type="reset" label="Cancel" ></lightning-button>
+                <lightning-button type="submit" variant="brand" label="Save"></lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+
+</template>

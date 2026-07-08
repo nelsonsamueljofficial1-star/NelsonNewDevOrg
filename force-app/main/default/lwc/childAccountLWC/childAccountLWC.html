@@ -1,0 +1,24 @@
+<!--
+* Purpose: This Html file is used to print parent account details in child component
+* Created By: Nelson Samuel J
+* Created On: 02-06-2026
+-->
+<template>
+    <lightning-card>
+        <ul>
+            <h1 class="slds-text-heading_large slds-text-align_center">Account Details</h1>
+            <template lwc:if={isDataAvailable}>
+
+                <li key={objChildAccount.Id}> Account Name: {objChildAccount.Name.value} </li>
+                <li key={objChildAccount.Id}> Account Number: {objChildAccount.AccountNumber.value} </li>
+                <li key={objChildAccount.Id}> Phone: {objChildAccount.Phone.value} </li>
+                <li key={objChildAccount.Id}> Industry: {objChildAccount.Industry.value} </li>
+                <li key={objChildAccount.Id}> Website: {objChildAccount.Website.value} </li>
+            </template>
+            <template lwc:else>
+                <li>No Account Data Available</li>
+            </template>
+
+        </ul>
+    </lightning-card>
+</template>
