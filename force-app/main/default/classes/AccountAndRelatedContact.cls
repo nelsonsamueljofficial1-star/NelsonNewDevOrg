@@ -7,7 +7,7 @@ public with sharing class AccountAndRelatedContact {
     @AuraEnabled
     public static List<Account> getAccountAndRelatedContactDetails() {
         try{
-            List<Account> accountList = [SELECT Id, Name, (SELECT Id, Name,Phone FROM Contacts) FROM Account];
+            List<Account> accountList = [SELECT Id, Name, (SELECT Id, Name FROM Contacts) FROM Account];
             return accountList;
         } catch(Exception e) {
             throw new AuraHandledException('Error fetching account and related contact details: ' + e.getMessage());
