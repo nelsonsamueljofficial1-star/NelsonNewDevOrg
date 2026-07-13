@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRW0001_Validate_Book_Availability</fullName>
+    <active>false</active>
+    <description>It is used to check that, the book is available or not</description>
+    <errorConditionFormula>AND(Book__r.Available_Copies__c  = 0 ||  ISBLANK(Book__r.Available_Copies__c ), ISNEW() )</errorConditionFormula>
+    <errorDisplayField>Book__c</errorDisplayField>
+    <errorMessage>Book is Out of Stock, kindly pick another book</errorMessage>
+</ValidationRule>

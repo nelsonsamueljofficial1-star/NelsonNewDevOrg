@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BK0001_Validate_ISBN</fullName>
+    <active>true</active>
+    <description>It is used to validate that, ISBN number must enter in an Creation time. After that, it can&apos;t change</description>
+    <errorConditionFormula>OR(ISCHANGED(ISBN_Number__c ),AND( ISNEW() , ISBLANK( ISBN_Number__c )) )</errorConditionFormula>
+    <errorDisplayField>ISBN_Number__c</errorDisplayField>
+    <errorMessage>ISBN can&apos;t change after creation. So, kindly enter a ISBN data carefully, while create a record.</errorMessage>
+</ValidationRule>

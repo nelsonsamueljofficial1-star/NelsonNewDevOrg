@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRA0002_Validate_Supplier_Cost</fullName>
+    <active>true</active>
+    <description>It is used to validate that if transaction type is Purchase, then Supplier and Unit cost is reqired.</description>
+    <errorConditionFormula>ISNEW() &amp;&amp; ISPICKVAL( Transaction_Type__c , &quot;Purchase&quot;) &amp;&amp;   OR(ISBLANK( Supplier__c ) ,ISBLANK( Unit_Cost__c ))</errorConditionFormula>
+    <errorMessage>When the transaction type is Purchase, the both Supplier and Unit Cost is required</errorMessage>
+</ValidationRule>

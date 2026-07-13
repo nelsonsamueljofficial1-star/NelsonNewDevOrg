@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Table_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>Table_Location__c</fields>
+    <fields>Seating_Capacity__c</fields>
+    <fields>Table_Status__c</fields>
+    <label>Table Compact Layout</label>
+</CompactLayout>

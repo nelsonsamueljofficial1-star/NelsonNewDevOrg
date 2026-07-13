@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRW0002_Validate_Dates</fullName>
+    <active>true</active>
+    <description>It is used to prevent user enter invalid date</description>
+    <errorConditionFormula>( Return_Date__c &lt; Borrow_Date__c ) || ( Due_Date__c &lt; Borrow_Date__c )</errorConditionFormula>
+    <errorMessage>Kindly enter a valid date : Borrow Date should be earlier than Return Date and Due Date</errorMessage>
+</ValidationRule>

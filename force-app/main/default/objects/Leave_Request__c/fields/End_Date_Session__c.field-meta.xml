@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>End_Date_Session__c</fullName>
+    <inlineHelpText>Session 1 defines Morning, and Session 2 defines Evening</inlineHelpText>
+    <label>End Date Session</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Session 1</fullName>
+                <default>false</default>
+                <label>Session 1</label>
+            </value>
+            <value>
+                <fullName>Session 2</fullName>
+                <default>false</default>
+                <label>Session 2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

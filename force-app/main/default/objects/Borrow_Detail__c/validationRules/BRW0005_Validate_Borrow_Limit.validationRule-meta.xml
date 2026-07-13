@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRW0005_Validate_Borrow_Limit</fullName>
+    <active>false</active>
+    <description>It is used to limit the borrow books.</description>
+    <errorConditionFormula>Member_Ship__r.No_of_Books_Borrowed__c  &gt;= Member_Ship__r.Borrow_Limit__c</errorConditionFormula>
+    <errorDisplayField>Member_Ship__c</errorDisplayField>
+    <errorMessage>This member reach his/her borrow limit</errorMessage>
+</ValidationRule>

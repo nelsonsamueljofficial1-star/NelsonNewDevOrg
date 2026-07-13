@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Symptoms__c</fullName>
+    <description>It is Symptoms of patient feels</description>
+    <label>Symptoms</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fever</fullName>
+                <default>false</default>
+                <label>Fever</label>
+            </value>
+            <value>
+                <fullName>Cough</fullName>
+                <default>false</default>
+                <label>Cough</label>
+            </value>
+            <value>
+                <fullName>Pain</fullName>
+                <default>false</default>
+                <label>Pain</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

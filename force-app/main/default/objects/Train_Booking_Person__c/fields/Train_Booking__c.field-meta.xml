@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Train_Booking__c</fullName>
+    <label>Train Booking</label>
+    <referenceTo>Train_Booking__c</referenceTo>
+    <relationshipLabel>Train Booking Persons</relationshipLabel>
+    <relationshipName>Train_Booking_Persons</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

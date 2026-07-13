@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LR_PERMISSION_HOURS_TYPE_VALIDATION</fullName>
+    <active>true</active>
+    <description>This validation rule is used to make sure that the fields needed for the Permission Hours Type</description>
+    <errorConditionFormula>AND(ISPICKVAL(Leave_Type__c, &apos;Permission Hours&apos;),OR(
+	 ISBLANK(Start_Date__c),
+	 ISBLANK(Start_Time__c),
+		ISBLANK(End_Time__c)
+	))</errorConditionFormula>
+    <errorMessage>To apply Permission Hours Leave, Start Date, Start Time, and End Time are mandatory</errorMessage>
+</ValidationRule>

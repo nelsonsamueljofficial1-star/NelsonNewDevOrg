@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BK0002_Validate_ISBN_Length</fullName>
+    <active>true</active>
+    <description>It is used to validate the ISBN length must be in 13 character</description>
+    <errorConditionFormula>LEN( ISBN_Number__c ) != 13</errorConditionFormula>
+    <errorDisplayField>ISBN_Number__c</errorDisplayField>
+    <errorMessage>ISBN Number must contain 13 character</errorMessage>
+</ValidationRule>
