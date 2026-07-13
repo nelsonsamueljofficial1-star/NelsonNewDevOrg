@@ -2,11 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <version>66.0</version>
     <types>
-        <members>Admin</members>
+        <members>*</members>
         <name>Profile</name>
     </types>
     <types>
-        <members>Plugin_Test__c</members>
+        <members>*</members>
         <name>CustomObject</name>
     </types>
 </Package>
