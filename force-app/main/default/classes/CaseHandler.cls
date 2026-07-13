@@ -14,7 +14,7 @@ public with sharing class CaseHandler {
     public static SameCaseCheckWrapper checkSameCaseSubject(Case objCase){
         SameCaseCheckWrapper objWrapper = new SameCaseCheckWrapper();
         try{
-            List<Case> lstCase = [SELECT Id, CaseNumber,Description, Subject FROM Case WHERE ContactId = :objCase.ContactId AND Subject = :objCase.Subject];
+            List<Case> lstCase = [SELECT Id, CaseNumber,Subject FROM Case WHERE ContactId = :objCase.ContactId AND Subject = :objCase.Subject];
             if(lstCase.size() > 0){
                 objWrapper.bolIsSameCase = true;
             } else {
